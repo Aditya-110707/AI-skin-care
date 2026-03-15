@@ -1,0 +1,393 @@
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>SkinSense AI Dermatology</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<h1>SkinSense AI</h1>
+
+<nav class="nav-links">
+<a href="#">Home</a>
+<a href="#skintypes">Skin Types</a>
+<a href="#products">Products</a>
+<a href="#analyzer">AI Analyzer</a>
+</nav>
+
+<div class="auth-buttons">
+<button class="login-btn">Login</button>
+<button class="signup-btn">Sign Up</button>
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h2>Discover Your Perfect Skin Routine</h2>
+<p>AI powered skincare analysis and personalized routines</p>
+
+</section>
+
+<!-- SKIN TYPES -->
+
+<section id="skintypes" class="skin-types">
+
+<h2>Know Your Skin Type</h2>
+
+<div class="skin-tabs">
+
+<button onclick="showSkin('normal')">Normal</button> <button onclick="showSkin('oily')">Oily</button> <button onclick="showSkin('dry')">Dry</button> <button onclick="showSkin('combination')">Combination</button>
+
+</div>
+
+<div id="skin-info">
+<p>Select a skin type to learn more.</p>
+</div>
+
+</section>
+
+<!-- AI ANALYZER -->
+
+<section id="analyzer" class="upload-section">
+
+<h2>AI Skin Analyzer</h2>
+<p>Capture your skin and let our AI analyze it instantly</p>
+
+<div class="camera-container">
+
+<video id="video" autoplay playsinline></video> <canvas id="canvas" style="display:none;"></canvas>
+
+</div>
+
+<div class="camera-buttons">
+
+<button onclick="capture()">Capture Photo</button> <button onclick="analyze()">Analyze Skin</button>
+
+</div>
+
+<div id="result"></div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products" class="carousel">
+
+<h3>Popular Skincare Products</h3>
+
+<div class="card-row">
+
+<a href="https://mamaearth.in/product/niacinamide-serum" target="_blank">
+<div class="card">
+<img src="/static/niacinamide.jpg">
+<p>Niacinamide Serum</p>
+</div>
+</a>
+
+<a href="https://mamaearth.in/product/rice-face-wash" target="_blank">
+<div class="card">
+<img src="/static/cleanser.jpg">
+<p>Hydrating Cleanser</p>
+</div>
+</a>
+
+<a href="https://mamaearth.in/product/vitamin-c-moisturizer" target="_blank">
+<div class="card">
+<img src="/static/vitamin-c.jpg">
+<p>Vitamin C Cream</p>
+</div>
+</a>
+
+<a href="https://mamaearth.in/product/ultra-light-sunscreen" target="_blank">
+<div class="card">
+<img src="/static/spf.jpg">
+<p>SPF Moisturizer</p>
+</div>
+</a>
+
+</div>
+
+</section>
+
+<!-- DERMATOLOGISTS -->
+
+<section class="dermatologist-section">
+
+<h3>Nearby Dermatologists</h3>
+<p>Find trusted skincare experts around you</p>
+
+<button onclick="findDoctors()">Find Dermatologists Near Me</button>
+
+<div id="doctorList"></div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+<p>© 2026 SkinSense AI | Made with 💚 by Nadish, Aditya, Aniket, Ajay</p>
+</footer>
+
+<!-- CHATBOT BUTTON -->
+
+<div class="chatbot-icon" onclick="toggleChat()">💬</div>
+
+<!-- CHATBOT WINDOW -->
+
+<div class="chatbot-box" id="chatbotBox">
+
+<h3>AI Dermatologist</h3>
+
+<div id="chatbox" class="chatbox"></div>
+
+<div class="chat-input-area">
+
+<input
+id="userInput"
+type="text"
+placeholder="Ask about skincare..."
+onkeypress="handleKey(event)"
+
+>
+
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+</div>
+
+<!-- SCRIPTS -->
+
+<script src="/static/chatbot.js"></script>
+
+<script>
+
+let video=document.getElementById("video");
+let canvas=document.getElementById("canvas");
+let context=canvas.getContext("2d");
+
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>{
+video.srcObject=stream;
+})
+.catch(err=>{
+alert("Camera access denied");
+});
+
+
+function capture(){
+
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+
+context.drawImage(video,0,0,canvas.width,canvas.height);
+
+video.style.display="none";
+canvas.style.display="block";
+
+}
+
+
+function analyze(){
+
+canvas.toBlob(function(blob){
+
+let formData=new FormData();
+formData.append("image",blob,"photo.jpg");
+
+fetch("/analyze",{
+method:"POST",
+body:formData
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let productHTML="";
+
+data.products.forEach(p=>{
+productHTML+=`<li><a href="${p.link}" target="_blank">${p.name}</a></li>`;
+});
+
+document.getElementById("result").innerHTML=`
+
+<h3>Skin Type: ${data.skin_type}</h3>
+
+<h3>Skin Health Score: ${data.skin_score}/100</h3>
+
+<b>Risks:</b> ${data.diseases.join(", ")}
+
+<h3>Recommended Care</h3>
+<ul>${data.recommendation.map(i=>`<li>${i}</li>`).join("")}</ul>
+
+<h3>Serums</h3>
+<ul>${data.serums.map(i=>`<li>${i}</li>`).join("")}</ul>
+
+<h3>Herbal Remedies</h3>
+<ul>${data.herbal.map(i=>`<li>${i}</li>`).join("")}</ul>
+
+<h3>Products</h3>
+<ul>${productHTML}</ul>
+
+<h3>Routine</h3>
+<ul>${data.routine.map(i=>`<li>${i}</li>`).join("")}</ul>
+
+<h3>Diet Tips</h3>
+<ul>${data.diet.map(i=>`<li>${i}</li>`).join("")}</ul>
+
+`;
+
+});
+
+});
+
+}
+
+
+function toggleChat(){
+
+let box=document.getElementById("chatbotBox");
+
+if(box.style.display==="block")
+box.style.display="none";
+else
+box.style.display="block";
+
+}
+
+
+function handleKey(event){
+
+if(event.key==="Enter"){
+sendMessage();
+}
+
+}
+
+
+function showSkin(type){
+
+let data={
+
+normal:`
+<h3>Normal Skin</h3>
+<p>Balanced skin with minimal oil and dryness.</p>
+<ul>
+<li>Use mild cleansers</li>
+<li>Maintain hydration</li>
+<li>Use SPF daily</li>
+</ul>
+`,
+
+oily:`
+<h3>Oily Skin</h3>
+<p>Produces excess sebum leading to shiny skin and acne.</p>
+<ul>
+<li>Use oil-free products</li>
+<li>Use salicylic acid cleanser</li>
+<li>Avoid heavy moisturizers</li>
+</ul>
+`,
+
+dry:`
+<h3>Dry Skin</h3>
+<p>Lacks moisture causing rough texture.</p>
+<ul>
+<li>Use hydrating cleansers</li>
+<li>Apply thick moisturizers</li>
+<li>Use hyaluronic acid serum</li>
+</ul>
+`,
+
+combination:`
+<h3>Combination Skin</h3>
+<p>Oily in T-zone and dry cheeks.</p>
+<ul>
+<li>Use balanced skincare</li>
+<li>Use lightweight moisturizers</li>
+<li>Hydrate dry areas</li>
+</ul>
+`
+
+};
+
+document.getElementById("skin-info").innerHTML=data[type];
+
+}
+
+
+function findDoctors(){
+
+if(!navigator.geolocation){
+alert("Location not supported");
+return;
+}
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+let lat=position.coords.latitude;
+let lon=position.coords.longitude;
+
+fetch(`/dermatologists?lat=${lat}&lon=${lon}`)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let html="";
+
+data.forEach(doc=>{
+
+let stars="⭐".repeat(Math.round(doc.rating));
+
+html+=`
+
+<div class="dermatologist-card">
+
+<h4>${doc.name}</h4>
+
+<p>${doc.address}</p>
+
+<p>${stars} (${doc.rating})</p>
+
+<a href="https://www.google.com/maps/search/?api=1&query=${doc.lat},${doc.lon}" target="_blank">
+<button>Directions</button>
+</a>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("doctorList").innerHTML=html;
+
+});
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

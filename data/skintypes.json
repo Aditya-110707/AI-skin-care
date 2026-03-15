@@ -1,0 +1,41 @@
+{
+  "normal": {
+    "title": "Normal Skin",
+    "description": "Normal skin is balanced with minimal oiliness or dryness. It usually has small pores and smooth texture.",
+    "tips": [
+      "Use gentle cleanser",
+      "Apply SPF 50 sunscreen",
+      "Use vitamin C serum"
+    ]
+  },
+
+  "oily": {
+    "title": "Oily Skin",
+    "description": "Oily skin produces excess sebum and is prone to acne and clogged pores.",
+    "tips": [
+      "Use salicylic acid cleanser",
+      "Use oil free moisturizer",
+      "Niacinamide serum helps control oil"
+    ]
+  },
+
+  "dry": {
+    "title": "Dry Skin",
+    "description": "Dry skin lacks moisture and may appear flaky or rough.",
+    "tips": [
+      "Use hyaluronic acid serum",
+      "Apply thick moisturizer",
+      "Drink 2-3L water daily"
+    ]
+  },
+
+  "combination": {
+    "title": "Combination Skin",
+    "description": "Combination skin has oily T-zone and dry cheeks.",
+    "tips": [
+      "Use lightweight moisturizer",
+      "Niacinamide serum for oil control",
+      "Use gentle cleanser"
+    ]
+  }
+}

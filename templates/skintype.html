@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ info.title }}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>{{ info.title }}</h1>
+
+<p>{{ info.description }}</p>
+
+<h3>Recommended Care</h3>
+
+<ul>
+{% for tip in info.tips %}
+<li>{{ tip }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

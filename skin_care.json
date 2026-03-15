@@ -1,0 +1,17 @@
+{
+  "acne": {
+    "answer": "Acne is caused by clogged pores and excess oil. Wash your face twice daily, avoid oily food, and use salicylic acid or benzoyl peroxide products."
+  },
+  "dry skin": {
+    "answer": "Dry skin can be improved by using moisturizers with hyaluronic acid, drinking enough water, and avoiding harsh soaps."
+  },
+  "pigmentation": {
+    "answer": "Pigmentation can be reduced using sunscreen, vitamin C serum, and retinoids. Avoid excessive sun exposure."
+  },
+  "oily skin": {
+    "answer": "Use gel-based cleansers, avoid heavy creams, and wash your face regularly to control excess oil."
+  },
+  "dark spots": {
+    "answer": "Dark spots may fade with vitamin C, niacinamide, and sunscreen protection."
+  }
+}

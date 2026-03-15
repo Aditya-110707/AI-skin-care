@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkinCare Stream</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+  <h1>SkinCare Stream</h1>
+  <nav class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Skin Types</a>
+    <a href="#">Products</a>
+    <a href="#">AI Analyzer</a>
+  </nav>
+  <div class="auth-buttons">
+    <button class="login-btn">Login</button>
+    <button class="signup-btn">Sign Up</button>
+  </div>
+</header>
+
+  <section class="hero">
+    <h2>Discover Your Perfect Skin Routine</h2>
+    <p>Stream AI-powered skincare insights and routines tailored for you</p>
+  </section>
+   <section class="upload-section">
+  <h3>Upload Your Skin Photo</h3>
+  <p>Let our AI analyze your skin type instantly</p>
+  <form id="uploadForm" enctype="multipart/form-data" method="POST" action="/analyze">
+    <input type="file" name="image" accept="image/*" capture="user" required>
+    <button type="submit">📸 Upload or Capture Photo</button>
+  </form>
+</section>
+
+  <footer> 
+  <section class="carousel">
+    <h3>Featured Routines</h3>
+    <div class="card-row">
+      <div class="card">Oily Skin Routine</div>
+      <div class="card">Dry Skin Routine</div>
+      <div class="card">Combination Care</div>
+      <div class="card">Sensitive Skin Tips</div>
+    </div>
+  </section>
+
+  <section class="carousel">
+    <h3>Popular Products</h3>
+    <div class="card-row">
+      <div class="card">Niacinamide Serum</div>
+      <div class="card">Hydrating Cleanser</div>
+      <div class="card">Vitamin C Cream</div>
+      <div class="card">SPF Moisturizer</div>
+    </div>
+  </section>
+  <section class="dermatologist-section">
+  <h3>Nearby Dermatologists</h3>
+  <p>Find trusted skincare experts around you</p>
+  <div class="dermatologist-list">
+    <div class="dermatologist-card">
+      <h4>Dr. A. Sharma</h4>
+      <p>Skin Specialist, Hamirpur</p>
+      <p class="location">📍 Hamirpur, HP</p>
+      <button>Book Appointment</button>
+      <button class="review-btn">Leave a Review</button>
+    </div>
+    <div class="dermatologist-card">
+      <h4>Dr. R. Verma</h4>
+      <p>Dermatology Clinic, Kangra</p>
+      <p class="location">📍 Kangra, HP</p>
+      <button>Book Appointment</button>
+      <button class="review-btn">Leave a Review</button>
+    </div>
+    <div class="dermatologist-card">
+      <h4>Dr. S. Gupta</h4>
+      <p>Cosmetic Dermatologist, Shimla</p>
+      <p class="location">📍 Shimla, HP</p>
+      <button>Book Appointment</button>
+      <button class="review-btn">Leave a Review</button>
+    </div>
+  </div>
+</section>
+
+  <footer>
+    <p>&copy; 2026 SkinCare Stream | Made with 💚 by Nadish,Aditya,Aniket,Ajay</p>
+  </footer>
+</body>
+</html>
