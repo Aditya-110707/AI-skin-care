@@ -86,21 +86,20 @@ background:#042f2e;
 color:white;
 }
 
-.signup-btn:hover
+.signup-btn:hover{
+background:#022c2b;
+transform:scale(1.05);
+}
 
-/* ---------- HERO ---------- */
-
-/* ---------- HERO SECTION FIX ---------- */
+/* ---------- HERO SECTION ---------- */
 
 .hero{
 
 width:100%;
-
-height:80vh;
+height:85vh;
 
 display:flex;
 flex-direction:column;
-
 justify-content:center;
 align-items:center;
 
@@ -109,7 +108,7 @@ text-align:center;
 padding:40px;
 
 background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
 url("/static/bg.jpg");
 
 background-size:cover;
@@ -120,11 +119,10 @@ color:white;
 
 }
 
-/* HERO HEADING */
-
 .hero h2{
 
-font-size:56px;
+font-size:60px;
+font-weight:700;
 
 max-width:900px;
 
@@ -132,23 +130,15 @@ margin-bottom:20px;
 
 text-align:center;
 
-color:white;
-
-text-shadow:0 8px 20px rgba(0,0,0,0.6);
+text-shadow:0 10px 25px rgba(0,0,0,0.6);
 
 }
-
-/* HERO SUBTEXT */
 
 .hero p{
 
 font-size:20px;
 
 max-width:650px;
-
-text-align:center;
-
-color:white;
 
 opacity:0.9;
 
@@ -224,8 +214,6 @@ color:#666;
 margin-bottom:25px;
 font-size:16px;
 }
-
-/* CAMERA */
 
 .camera-container{
 width:540px;
